@@ -1,7 +1,8 @@
-// Copyright by Free2Play-Entertainment (2020)
 
 
 #include "Parser.h"
+#include "XmlFile.h"
+#include "XmlNode.h"
 #include "Misc/Paths.h"
 
 /* Creates a UParser object */

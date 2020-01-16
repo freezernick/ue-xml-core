@@ -3,7 +3,6 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "XmlFile.h"
 #include "Parser.generated.h"
 
 /**
