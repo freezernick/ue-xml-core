@@ -5,6 +5,29 @@
 #include "UObject/NoExportTypes.h"
 #include "Parser.generated.h"
 
+class FXmlFile;
+
+/* A struct representing the properties of an XML node */
+USTRUCT(BlueprintType)
+struct FBpXmlNode
+{
+	GENERATED_BODY()
+
+	/* The value of the node */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Value;
+
+	/* The tag of the node */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Tag;
+
+	FBpXmlNode()
+	{
+		Value = FString();
+		Tag = FString();
+	}
+};
+
 /**
  * A simple class to parse xml files
  */
@@ -39,4 +62,12 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
 	void UnloadFile();
+
+	/**
+	 * Returns the root node of the file
+	 * @param RootNode The root node of the file
+	 * @return Whether the root node is valid or not
+	*/
+	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
+	bool GetRoot(FBpXmlNode& RootNode);
 };

@@ -27,3 +27,17 @@ void UParser::UnloadFile()
 {
     CurrentFile->~FXmlFile();
 }
+
+/* Gets the root node of the file */
+bool UParser::GetRoot(FBpXmlNode& RootNode)
+{
+    if(!CurrentFile->IsValid())
+    {
+        return false;
+    }
+    FBpXmlNode Node = FBpXmlNode();
+    Node.Value = CurrentFile->GetRootNode()->GetContent();
+    Node.Tag = CurrentFile->GetRootNode()->GetTag();
+    RootNode = Node;
+    return true;
+}
