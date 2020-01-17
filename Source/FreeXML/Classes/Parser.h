@@ -28,6 +28,9 @@ struct FBpXmlNode
 	}
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNextNode, FBpXmlNode, Node);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLastNode);
+
 /**
  * A simple class to parse xml files
  */
@@ -41,6 +44,14 @@ private:
 	FXmlFile* CurrentFile;
 
 public:
+
+	/* Called when the parsing loop reaches the next node */
+	UPROPERTY(BlueprintAssignable, Category = "F2P-Entertainment|Xml Parser")
+	FNextNode OnNextNode;
+
+	/* Called when the parsing loop finishes his task */
+	UPROPERTY(BlueprintAssignable, Category = "F2P-Entertainment|Xml Parser")
+	FLastNode OnLastNode;
 
 	/**
 	 * Creates a UParser object
