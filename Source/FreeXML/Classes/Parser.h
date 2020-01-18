@@ -26,6 +26,12 @@ struct FBpXmlNode
 		Value = FString();
 		Tag = FString();
 	}
+
+	FBpXmlNode(FString ValueP, FString TagP)
+	{
+		Value = ValueP;
+		Tag = ValueP;
+	}
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNextNode, FBpXmlNode, Node);
@@ -75,10 +81,17 @@ public:
 	void UnloadFile();
 
 	/**
+	 * Starts iterating over each node of a file
+	 * Calls OnNextNode
+	 */
+	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	void StartParsing();
+
+	/**
 	 * Returns the root node of the file
 	 * @param RootNode The root node of the file
 	 * @return Whether the root node is valid or not
 	*/
 	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
-	bool GetRoot(FBpXmlNode& RootNode);
+	FBpXmlNode GetRoot();
 };
