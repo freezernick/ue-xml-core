@@ -14,11 +14,11 @@ struct FBpXmlNode
 	GENERATED_BODY()
 
 	/* The value of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
 	FString Value;
 
 	/* The tag of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
 	FString Tag;
 
 	FBpXmlNode()
