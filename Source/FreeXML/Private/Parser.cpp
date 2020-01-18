@@ -28,16 +28,25 @@ void UParser::UnloadFile()
     CurrentFile->~FXmlFile();
 }
 
+/* Starts parsing */
+void UParser::StartParsing()
+{
+    FXmlNode* Root = CurrentFile->GetRootNode();
+    OnNextNode.Broadcast(FBpXmlNode(Root->GetContent(), Root->GetTag()));
+    TArray<FXmlNode*> Children = Root->GetChildrenNodes();
+    for(FXmlNode* Node : Children)
+    {
+        OnNextNode.Broadcast(FBpXmlNode(Node->GetContent(), Node->GetTag()));
+    }
+    OnLastNode.Broadcast();
+}
+
 /* Gets the root node of the file */
-bool UParser::GetRoot(FBpXmlNode& RootNode)
+FBpXmlNode UParser::GetRoot()
 {
     if(!CurrentFile->IsValid())
     {
-        return false;
+        return FBpXmlNode();
     }
-    FBpXmlNode Node = FBpXmlNode();
-    Node.Value = CurrentFile->GetRootNode()->GetContent();
-    Node.Tag = CurrentFile->GetRootNode()->GetTag();
-    RootNode = Node;
-    return true;
+    return FBpXmlNode(CurrentFile->GetRootNode()->GetContent(), CurrentFile->GetRootNode()->GetTag());
 }
