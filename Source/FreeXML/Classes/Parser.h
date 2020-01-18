@@ -89,8 +89,7 @@ public:
 
 	/**
 	 * Returns the root node of the file
-	 * @param RootNode The root node of the file
-	 * @return Whether the root node is valid or not
+	 * @return A FBpXmlStruct representing the root node
 	*/
 	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
 	FBpXmlNode GetRoot();
