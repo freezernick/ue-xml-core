@@ -30,7 +30,7 @@ struct FBpXmlNode
 	FBpXmlNode(FString ValueP, FString TagP)
 	{
 		Value = ValueP;
-		Tag = ValueP;
+		Tag = TagP;
 	}
 };
 
