@@ -35,7 +35,7 @@ struct FBpXmlNode
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNextNode, FBpXmlNode, Node);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLastNode);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFinishedParsing);
 
 /**
  * A simple class to parse xml files
@@ -57,7 +57,7 @@ public:
 
 	/* Called when the parsing loop finishes his task */
 	UPROPERTY(BlueprintAssignable, Category = "F2P-Entertainment|Xml Parser")
-	FLastNode OnLastNode;
+	FFinishedParsing OnParsingFinished;
 
 	/**
 	 * Creates a UParser object

@@ -38,7 +38,7 @@ void UParser::StartParsing()
     {
         OnNextNode.Broadcast(FBpXmlNode(Node->GetContent(), Node->GetTag()));
     }
-    OnLastNode.Broadcast();
+    OnParsingFinished.Broadcast();
 }
 
 /* Gets the root node of the file */
