@@ -35,6 +35,7 @@ void UParser::StartParsing()
     OnParsingFinished.Broadcast();
 }
 
+/* The actual parsing */
 void UParser::ParseNode(FXmlNode* Node)
 {
     TArray<FBPXmlAttribute> Attributes;

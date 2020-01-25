@@ -123,6 +123,8 @@ public:
 
 	/**
 	 * The actual parsing
+	 * @param Node The node that should be parsed
+	 * Calls ParseNode on all child-nodes
 	 */
 	void ParseNode(FXmlNode* Node);
 
