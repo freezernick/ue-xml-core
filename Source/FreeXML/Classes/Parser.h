@@ -7,9 +7,36 @@
 
 class FXmlFile;
 
+/* A struct representing attributes of an XML tag */
+USTRUCT(BlueprintType)
+struct FBPXmlAttribute
+{
+	GENERATED_BODY()
+
+	/* The name of the attribute */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	FString Name;
+
+	/* The value of the attribute */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	FString Value;
+
+	FBPXmlAttribute()
+	{
+		Name = "";
+		Value = "";
+	}
+
+	FBPXmlAttribute(const FString NameP, const FString ValueP)
+	{
+		Name = NameP;
+		Value = ValueP;
+	}
+};
+
 /* A struct representing the properties of an XML node */
 USTRUCT(BlueprintType)
-struct FBpXmlNode
+struct FBPXmlNode
 {
 	GENERATED_BODY()
 
@@ -21,20 +48,26 @@ struct FBpXmlNode
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
 	FString Tag;
 
-	FBpXmlNode()
+	/* The attributes of the node */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	TArray<FBPXmlAttribute> Attributes;
+
+	FBPXmlNode()
 	{
-		Value = FString();
-		Tag = FString();
+		Value = "";
+		Tag = "";
+		Attributes = TArray<FBPXmlAttribute>();
 	}
 
-	FBpXmlNode(FString ValueP, FString TagP)
+	FBPXmlNode(const FString ValueP, const FString TagP, const TArray<FBPXmlAttribute> AttributesP)
 	{
 		Value = ValueP;
 		Tag = TagP;
+		Attributes = AttributesP;
 	}
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNextNode, FBpXmlNode, Node);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNextNode, FBPXmlNode, Node);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFinishedParsing);
 
 /**
@@ -92,5 +125,5 @@ public:
 	 * @return A FBpXmlStruct representing the root node
 	*/
 	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
-	FBpXmlNode GetRoot();
+	FBPXmlNode GetRoot();
 };

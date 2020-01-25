@@ -32,21 +32,37 @@ void UParser::UnloadFile()
 void UParser::StartParsing()
 {
     FXmlNode* Root = CurrentFile->GetRootNode();
-    OnNextNode.Broadcast(FBpXmlNode(Root->GetContent(), Root->GetTag()));
-    TArray<FXmlNode*> Children = Root->GetChildrenNodes();
-    for(FXmlNode* Node : Children)
+    TArray<FBPXmlAttribute> Attributes;
+    for(const FXmlAttribute Attribute : Root->GetAttributes())
     {
-        OnNextNode.Broadcast(FBpXmlNode(Node->GetContent(), Node->GetTag()));
+        Attributes.Add(FBPXmlAttribute(Attribute.GetTag(), Attribute.GetValue()));
     }
+    OnNextNode.Broadcast(FBPXmlNode(Root->GetContent(), Root->GetTag(), Attributes));
+    TArray<FXmlNode*> Children = Root->GetChildrenNodes();
+    for(const FXmlNode* Node : Children)
+    {
+        Attributes.Empty();
+        for(const FXmlAttribute Attribute : Node->GetAttributes())
+        {
+            Attributes.Add(FBPXmlAttribute(Attribute.GetTag(), Attribute.GetValue()));
+        }
+        OnNextNode.Broadcast(FBPXmlNode(Node->GetContent(), Node->GetTag(), Attributes));
+    }
+    Attributes.Empty();
     OnParsingFinished.Broadcast();
 }
 
 /* Gets the root node of the file */
-FBpXmlNode UParser::GetRoot()
+FBPXmlNode UParser::GetRoot()
 {
     if(!CurrentFile->IsValid())
     {
-        return FBpXmlNode();
+        return FBPXmlNode();
     }
-    return FBpXmlNode(CurrentFile->GetRootNode()->GetContent(), CurrentFile->GetRootNode()->GetTag());
+    TArray<FBPXmlAttribute> Attributes;
+    for(const FXmlAttribute Attribute : CurrentFile->GetRootNode()->GetAttributes())
+    {
+        Attributes.Add(FBPXmlAttribute(Attribute.GetTag(), Attribute.GetValue()));
+    }
+    return FBPXmlNode(CurrentFile->GetRootNode()->GetContent(), CurrentFile->GetRootNode()->GetTag(), Attributes);
 }
