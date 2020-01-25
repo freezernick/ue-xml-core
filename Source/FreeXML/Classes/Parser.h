@@ -41,13 +41,13 @@ struct FBPXmlNode
 {
 	GENERATED_BODY()
 
-	/* The value of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
-	FString Value;
-
 	/* The tag of the node */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
 	FString Tag;
+
+	/* The value of the node */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	FString Value;
 
 	/* The attributes of the node */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
@@ -55,15 +55,15 @@ struct FBPXmlNode
 
 	FBPXmlNode()
 	{
-		Value = "";
 		Tag = "";
+		Value = "";
 		Attributes = TArray<FBPXmlAttribute>();
 	}
 
 	FBPXmlNode(const FString ValueP, const FString TagP, const TArray<FBPXmlAttribute> AttributesP)
 	{
-		Value = ValueP;
 		Tag = TagP;
+		Value = ValueP;
 		Attributes = AttributesP;
 	}
 };
