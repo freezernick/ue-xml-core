@@ -6,6 +6,7 @@
 #include "Parser.generated.h"
 
 class FXmlFile;
+class FXmlNode;
 
 /* A struct representing attributes of an XML tag */
 USTRUCT(BlueprintType)
@@ -119,6 +120,11 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
 	void StartParsing();
+
+	/**
+	 * The actual parsing
+	 */
+	void ParseNode(FXmlNode* Node);
 
 	/**
 	 * Returns the root node of the file
