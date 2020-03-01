@@ -108,6 +108,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
 	bool LoadFile(const FString Path);
 
+	FString DefaultPath;
+
 	/**
 	 * Unloads a file
 	 */
@@ -134,4 +136,12 @@ public:
 	*/
 	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
 	FBPXmlNode GetRoot();
+
+	/**
+	 * Saves the Xml to the path where it was opened or the to the specified path
+	 * @param OverwritePath Specify an absolute path to where to save the Xml into
+	 * @return Whether the Xml could be saved or not
+	 */
+	UFUNCTION(BlueprintCallable, meta = (AdvancedDisplay = "OverwritePath"), Category = "F2P-Entertainment|Xml Parser")
+	bool SaveFile(FString OverwritePath);
 };

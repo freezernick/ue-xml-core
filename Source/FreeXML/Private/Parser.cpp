@@ -19,6 +19,7 @@ bool UParser::LoadFile(const FString Path)
         return false;
     }
     CurrentFile = new FXmlFile(Path);
+    DefaultPath = Path;
     return CurrentFile->IsValid();
 }
 
@@ -65,4 +66,11 @@ FBPXmlNode UParser::GetRoot()
         Attributes.Add(FBPXmlAttribute(Attribute.GetTag(), Attribute.GetValue()));
     }
     return FBPXmlNode(CurrentFile->GetRootNode()->GetContent(), CurrentFile->GetRootNode()->GetTag(), Attributes);
+}
+
+bool UParser::SaveFile(FString OverwritePath = "")
+{
+    if(!CurrentFile->IsValid()) { return false; }
+
+    return CurrentFile->Save(OverwritePath == "" ? DefaultPath : OverwritePath);
 }
