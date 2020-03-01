@@ -178,3 +178,26 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Append Node"), Category = "F2P-Entertainment|Xml Parser")
 	static void AppendChildNode(const FBPXmlNode Parent, const FBPXmlNode Child, UParser* Parser);
 };
+
+/**
+ * A class representing an Xml Node
+ */
+UCLASS(Blueprintable)
+class FREEXML_API UXmlNode : public UObject
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Tag;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Content;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UXmlNode*> ChildNodes;
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateXmlNode(UParser* Parser);
+};

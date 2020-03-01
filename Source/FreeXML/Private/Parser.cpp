@@ -111,3 +111,8 @@ void UParser::AppendChildNode(const FBPXmlNode Parent, const FBPXmlNode Child, U
     if(!Parser) { return; }
     Parser->AppendNode(Parent, Child);
 }
+
+void UXmlNode::UpdateXmlNode(UParser* Parser)
+{
+
+}
