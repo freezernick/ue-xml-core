@@ -19,12 +19,14 @@ bool UParser::LoadFile(const FString Path)
         return false;
     }
     CurrentFile = new FXmlFile(Path);
+    DefaultPath = Path;
     return CurrentFile->IsValid();
 }
 
 /* Unloads a file */
 void UParser::UnloadFile()
 {
+    DefaultPath = "";
     CurrentFile->~FXmlFile();
 }
 
@@ -65,4 +67,47 @@ FBPXmlNode UParser::GetRoot()
         Attributes.Add(FBPXmlAttribute(Attribute.GetTag(), Attribute.GetValue()));
     }
     return FBPXmlNode(CurrentFile->GetRootNode()->GetContent(), CurrentFile->GetRootNode()->GetTag(), Attributes);
+}
+
+/* Saves the currently loaded Xml */
+bool UParser::SaveFile(FString OverwritePath = "")
+{
+    if(!CurrentFile->IsValid()) { return false; }
+
+    return CurrentFile->Save(OverwritePath == "" ? DefaultPath : OverwritePath);
+}
+
+/* Changes the content / value a node */
+void UParser::SetContent(const FBPXmlNode BP) const
+{
+    FXmlNode* Node = CurrentFile->GetRootNode()->FindChildNode(BP.Tag);
+    if(!Node) { return; }
+    Node->SetContent(BP.Value);
+}
+
+/* Helper for Context Sensitivity */
+void UParser::UpdateContent(FBPXmlNode Node, UParser* Parser)
+{
+    if(!Parser) { return; }
+    Parser->SetContent(Node);
+}
+
+/* Appends a new node to the selected node */
+void UParser::AppendNode(const FBPXmlNode Parent, const FBPXmlNode Child)
+{
+    if(!CurrentFile->IsValid()) { return; }
+    FXmlNode* Node = CurrentFile->GetRootNode();
+    if(Parent.Tag != Node->GetTag())
+    {
+        Node = Node->FindChildNode(Parent.Tag);
+    }
+    if(!Node) { return; }
+    Node->AppendChildNode(Child.Tag, Child.Value);
+}
+
+/* Helper for Context Sensitivity */
+void UParser::AppendChildNode(const FBPXmlNode Parent, const FBPXmlNode Child, UParser* Parser)
+{
+    if(!Parser) { return; }
+    Parser->AppendNode(Parent, Child);
 }
