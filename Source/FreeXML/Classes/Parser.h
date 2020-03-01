@@ -144,4 +144,10 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, meta = (AdvancedDisplay = "OverwritePath"), Category = "F2P-Entertainment|Xml Parser")
 	bool SaveFile(FString OverwritePath);
+
+	UFUNCTION(BlueprintCallable)
+	void SetContent(const FBPXmlNode Node) const;
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Content"), Category = "F2P-Entertainment|Xml Parser")
+	static void UpdateContent(FBPXmlNode Node, UParser* Parser);
 };

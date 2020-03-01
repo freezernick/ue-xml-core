@@ -26,6 +26,7 @@ bool UParser::LoadFile(const FString Path)
 /* Unloads a file */
 void UParser::UnloadFile()
 {
+    DefaultPath = "";
     CurrentFile->~FXmlFile();
 }
 
@@ -73,4 +74,16 @@ bool UParser::SaveFile(FString OverwritePath = "")
     if(!CurrentFile->IsValid()) { return false; }
 
     return CurrentFile->Save(OverwritePath == "" ? DefaultPath : OverwritePath);
+}
+
+void UParser::SetContent(const FBPXmlNode BP) const
+{
+    FXmlNode* Node = CurrentFile->GetRootNode()->FindChildNode(BP.Tag);
+    if(!Node) { return; }
+    Node->SetContent(BP.Value);
+}
+
+void UParser::UpdateContent(FBPXmlNode Node, UParser* Parser)
+{
+    Parser->SetContent(Node);
 }
