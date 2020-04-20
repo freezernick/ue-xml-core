@@ -83,6 +83,8 @@ private:
 
 	FXmlFile* CurrentFile;
 
+	const FString Meta = "<?xml version=\"1.0\"?>\n";
+
 public:
 
 	/* Called when the parsing loop reaches the next node */
@@ -107,6 +109,9 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
 	bool LoadFile(const FString Path);
+
+	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	bool CreateXml(const FString RootNode, const FString SavePath);
 
 	FString DefaultPath;
 

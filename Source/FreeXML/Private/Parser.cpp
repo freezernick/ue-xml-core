@@ -23,6 +23,13 @@ bool UParser::LoadFile(const FString Path)
     return CurrentFile->IsValid();
 }
 
+bool UParser::CreateXml(const FString RootNode, const FString Path)
+{
+    CurrentFile = new FXmlFile(Meta + "<" + RootNode + ">\n" "</" + RootNode + ">");
+    DefaultPath = Path;
+    return CurrentFile->IsValid();
+}
+
 /* Unloads a file */
 void UParser::UnloadFile()
 {
