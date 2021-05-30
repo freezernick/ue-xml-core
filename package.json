@@ -1,6 +1,6 @@
 {
   "name": "ue-xml-core",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A free plugin allowing parsing of XML files in Blueprints ",
   "main": "none",
   "scripts": {
