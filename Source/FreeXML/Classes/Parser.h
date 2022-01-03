@@ -15,11 +15,11 @@ struct FBPXmlAttribute
 	GENERATED_BODY()
 
 	/* The name of the attribute */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Xml Parser")
 	FString Name;
 
 	/* The value of the attribute */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Xml Parser")
 	FString Value;
 
 	FBPXmlAttribute()
@@ -42,15 +42,15 @@ struct FBPXmlNode
 	GENERATED_BODY()
 
 	/* The tag of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Xml Parser")
 	FString Tag;
 
 	/* The value of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Xml Parser")
 	FString Value;
 
 	/* The attributes of the node */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Xml Parser")
 	TArray<FBPXmlAttribute> Attributes;
 
 	FBPXmlNode()
@@ -86,18 +86,18 @@ private:
 public:
 
 	/* Called when the parsing loop reaches the next node */
-	UPROPERTY(BlueprintAssignable, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(BlueprintAssignable, Category = "Xml Parser")
 	FNextNode OnNextNode;
 
 	/* Called when the parsing loop finishes his task */
-	UPROPERTY(BlueprintAssignable, Category = "F2P-Entertainment|Xml Parser")
+	UPROPERTY(BlueprintAssignable, Category = "Xml Parser")
 	FFinishedParsing OnParsingFinished;
 
 	/**
 	 * Creates a UParser object
 	 * @return The newly created UParser pointer / Parser Object Reference 
 	 */
-	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintPure, Category = "Xml Parser")
 	static UParser* CreateParser();
 
 	/**
@@ -105,7 +105,7 @@ public:
 	 * @param Path The absolute path to the file
 	 * @return Whether the file could be loaded or not
 	 */
-	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, Category = "Xml Parser")
 	bool LoadFile(const FString Path);
 
 	FString DefaultPath;
@@ -113,14 +113,14 @@ public:
 	/**
 	 * Unloads a file
 	 */
-	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, Category = "Xml Parser")
 	void UnloadFile();
 
 	/**
 	 * Starts iterating over each node of a file
 	 * Calls OnNextNode
 	 */
-	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, Category = "Xml Parser")
 	void StartParsing();
 
 	/**
@@ -134,7 +134,7 @@ public:
 	 * Returns the root node of the file
 	 * @return A FBpXmlStruct representing the root node
 	*/
-	UFUNCTION(BlueprintPure, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintPure, Category = "Xml Parser")
 	FBPXmlNode GetRoot();
 
 	/**
@@ -142,14 +142,14 @@ public:
 	 * @param OverwritePath Specify an absolute path to where to save the Xml into
 	 * @return Whether the Xml could be saved or not
 	 */
-	UFUNCTION(BlueprintCallable, meta = (AdvancedDisplay = "OverwritePath"), Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, meta = (AdvancedDisplay = "OverwritePath"), Category = "Xml Parser")
 	bool SaveFile(FString OverwritePath);
 
 	/**
 	 * Updates the content / value of the specified node
 	 * @param Node The node with the altered content / value
 	 */
-	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, Category = "Xml Parser")
 	void SetContent(const FBPXmlNode Node) const;
 
 
@@ -158,7 +158,7 @@ public:
 	 * @param Node The node with the changed content / value
 	 * @param Parser A reference to a UParser object with the loaded XML
 	 */
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Content"), Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Content"), Category = "Xml Parser")
 	static void UpdateContent(FBPXmlNode Node, UParser* Parser);
 
 	/**
@@ -166,7 +166,7 @@ public:
 	 * @param Parent The node to add the Child to
 	 * @param Child The new node
 	 */
-	UFUNCTION(BlueprintCallable, Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, Category = "Xml Parser")
 	void AppendNode(const FBPXmlNode Parent, const FBPXmlNode Child);
 
 	/**
@@ -175,6 +175,6 @@ public:
 	 * @param Child The new node
 	 * @param Parser A reference to a UParser object with a loaded XML
 	 */
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Append Node"), Category = "F2P-Entertainment|Xml Parser")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Append Node"), Category = "Xml Parser")
 	static void AppendChildNode(const FBPXmlNode Parent, const FBPXmlNode Child, UParser* Parser);
 };
